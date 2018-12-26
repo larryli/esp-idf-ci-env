@@ -6,4 +6,5 @@ FROM espressif/esp32-ci-env:v8
 MAINTAINER Larry Li larryli@qq.com
 
 ENV IDF_PATH=/opt/local/espressif/esp-idf
-RUN git clone -b v3.1.1 --recursive https://github.com/espressif/esp-idf.git $IDF_PATH
+RUN git clone -b v3.1.1 --recursive https://github.com/espressif/esp-idf.git $IDF_PATH \
+    && find $IDF_PATH -type d -name .git -prune -exec rm -rf {} \;
