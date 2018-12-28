@@ -1,10 +1,20 @@
 # This dockerfile uses Environment for ESP32 CI builds 
-# ESP-IDF CI builds - 3.1.1
+# Ubuntu 18.04
+# Toolchain linux64-1.22.0-80-g6c4433a-5.2.0
+# https://docs.espressif.com/projects/esp-idf/en/v3.1.1/get-started/linux-setup.html
+# ESP-IDF v3.1.1
+# https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html#get-esp-idf
 # Author: Larry Li
 
-FROM espressif/esp32-ci-env:v8
+FROM ubuntu:18.04
 MAINTAINER Larry Li larryli@qq.com
 
-ENV IDF_PATH=/opt/local/espressif/esp-idf
-RUN git clone -b v3.1.1 --recursive https://github.com/espressif/esp-idf.git $IDF_PATH \
-    && find $IDF_PATH -type d -name .git -prune -exec rm -rf {} \;
+ENV IDF_PATH="/opt/local/espressif/esp-idf" \
+    PATH="/opt/local/espressif/xtensa-esp32-elf/bin:${PATH}"
+RUN apt-get update \
+    && apt-get install -y gcc git wget make libncurses-dev flex bison gperf python python-serial \
+	&& rm -r /var/lib/apt/lists/*
+RUN mkdir -p /opt/local/espressif/ \
+    && wget -qO- https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-1.22.0-80-g6c4433a-5.2.0.tar.gz \
+    | tar xz -C /opt/local/espressif/
+RUN git clone -b v3.1.1 --depth 1 --recursive https://github.com/espressif/esp-idf.git $IDF_PATH
