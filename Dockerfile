@@ -1,10 +1,16 @@
-# This dockerfile uses Environment for ESP32 CI builds 
+# This dockerfile uses Environment for ESP32 CI builds
+#
 # Ubuntu 18.04
+# https://hub.docker.com/_/ubuntu
+#
 # Toolchain linux64-1.22.0-80-g6c4433a-5.2.0
 # https://docs.espressif.com/projects/esp-idf/en/v3.1.1/get-started/linux-setup.html
+#
 # ESP-IDF v3.1.1
-# https://docs.espressif.com/projects/esp-idf/en/stable/get-started/index.html#get-esp-idf
+# https://docs.espressif.com/projects/esp-idf/en/v3.1.1/get-started/index.html#get-esp-idf
+#
 # Author: Larry Li
+# https://github.com/larryli/esp-idf-ci-env
 
 FROM ubuntu:18.04
 MAINTAINER Larry Li larryli@qq.com
