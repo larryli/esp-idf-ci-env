@@ -25,3 +25,4 @@ RUN mkdir -p /opt/local/espressif/ \
     | tar xz -C /opt/local/espressif/
 RUN git clone -b v3.2 --depth 1 --recursive https://github.com/espressif/esp-idf.git $IDF_PATH \
     && cd $IDF_PATH && git submodule foreach --recursive 'git gc --aggressive --prune=all'
+RUN python -m pip install --user -r $IDF_PATH/requirements.txt
